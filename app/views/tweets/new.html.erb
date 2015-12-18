@@ -1,0 +1,56 @@
+<div class="contents row">
+<input type="text" placeholder="enter your access key here" class="js--key"><input type="button" value="apply" class="js--apply" />
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+ 
+(function(){
+ 
+  var url = 'http://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
+  var params = {
+    keyid: 'd75be7560098416f039e08b0ded07250',
+    format: 'json',
+    name: ''
+    // latitude: 35.670083,
+    // longitude: 139.763267,
+    // range: 1
+  };
+ 
+  var showResult = function(result){
+    if ( result.total_hit_count > 0 ) {
+      var res = '';
+      // alert( result.total_hit_count + '件の結果が見つかりました。\n' );
+
+      $('#image_display').attr({src: result.rest[0].image_url.shop_image1})
+      $('#image_input').val(result.rest[0].image_url.shop_image1)
+      $('#display_tel').val(result.rest[0].tel)
+
+      for ( var i in result.rest ){
+          res += result.rest[i].id + ' ' + result.rest[i].name + ' ' + result.rest[i].access.line + ' ' + result.rest[i].access.station + ' ' + result.rest[i].access.walk + '分 ' + result.rest[i].image_url.shop_image1 + '\n';
+      }
+      // alert(res);
+    } else {
+      alert( '検索結果が見つかりませんでした。' );
+    }
+  }
+ 
+  $(document).on('click', '.js--apply', function(){
+    params.name = $('.js--key').val();
+    $.getJSON(url, params, function(result){
+      showResult(result);
+    });
+  });
+ 
+})(jQuery);
+ 
+</script>
+<%= form_tag('/tweets', method: :post) do %>
+<h3>
+投稿する
+</h3>
+<img src = "", alt="店舗画像", id = "image_display">
+<input name="image" type="hidden" id="image_input">
+<input value = "", placeholder="tel" type="text" name="tel", id="display_tel">
+<textarea cols="30" name="text" placeholder="text" rows="10"></textarea>
+<input type="submit" value="SENT">
+<% end %>
+  </div>
