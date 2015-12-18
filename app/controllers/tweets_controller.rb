@@ -10,12 +10,12 @@
     end
 
     def create
-      Tweet.create(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+      Tweet.create(image: tweet_params[:image], restname: tweet_params[:restname], text: tweet_params[:text], user_id: current_user.id)
     end
 
     private
     def tweet_params
-      params.permit(:image, :text)
+      params.permit(:image, :restname, :text)
     end
 
     def move_to_index

@@ -23,6 +23,7 @@
       $('#image_display').attr({src: result.rest[0].image_url.shop_image1})
       $('#image_input').val(result.rest[0].image_url.shop_image1)
       $('#display_tel').val(result.rest[0].tel)
+      $('#display_name').val(result.rest[0].name)
 
       for ( var i in result.rest ){
           res += result.rest[i].id + ' ' + result.rest[i].name + ' ' + result.rest[i].access.line + ' ' + result.rest[i].access.station + ' ' + result.rest[i].access.walk + '分 ' + result.rest[i].image_url.shop_image1 + '\n';
@@ -49,6 +50,7 @@
 </h3>
 <img src = "", alt="店舗画像", id = "image_display">
 <input name="image" type="hidden" id="image_input">
+<input value = "", placeholder="restname" type="text" name="restname", id="display_name">
 <input value = "", placeholder="tel" type="text" name="tel", id="display_tel">
 <textarea cols="30" name="text" placeholder="text" rows="10"></textarea>
 <input type="submit" value="SENT">
